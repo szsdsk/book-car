@@ -9,8 +9,12 @@ import (
 	"net/http"
 )
 
+//	func createMyRender() *html.Engine {
+//		engine := html.New("./templates", ".html")
+//		return engine
+//	}
 func createMyRender() *html.Engine {
-	engine := html.New("./templates", ".html")
+	engine := html.New("./views", ".tmpl")
 	return engine
 }
 
@@ -19,7 +23,6 @@ func InitRouter() {
 	app := fiber.New(fiber.Config{
 		Views: createMyRender(), //渲染html模板
 	})
-
 	// 使用默认的请求日志中间件
 	app.Use(func(c *fiber.Ctx) error {
 		// 获取方法
@@ -62,10 +65,31 @@ func InitRouter() {
 
 	api := app.Group("/api")
 	{
-		api.Get("/cars", controller.GetCars)
-		api.Post("/cars", controller.CreateCar)
-		api.Put("/cars/:id", controller.UpdateCar)
-		api.Delete("/cars/:id", controller.DeleteCar)
+		car := api.Group("/cars")
+		{
+			car.Get("/", controller.GetCars)
+			car.Post("/", controller.CreateCar)
+			car.Put("/:id", controller.UpdateCar)
+			car.Delete("/:id", controller.DeleteCar)
+		}
+
+		booking := api.Group("/bookings")
+		{
+			booking.Get("/", controller.GetBookRecords)
+			booking.Post("/", controller.CreateBookRecord)
+		}
+
+		location := api.Group("/locations")
+		{
+			location.Get("/", controller.GetLocations)
+			location.Post("/", controller.CreateLocation)
+		}
+
+		customer := api.Group("/customers")
+		{
+			customer.Get("/", controller.GetCustomers)
+			customer.Post("/", controller.GetCustomers)
+		}
 	}
 	admin := app.Group("/admin")
 	{

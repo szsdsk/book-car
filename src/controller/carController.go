@@ -10,33 +10,9 @@ import (
 )
 
 func GetCars(c *fiber.Ctx) error {
-	carId := c.Query("carId")
-	maker := c.Query("make")
-	model := c.Query("model")
-	pricePerHour := c.Query("pricePerHour")
-	pricePerDay := c.Query("pricePerDay")
-	capacity := c.Query("capacity")
-	query := database.DB
-	if carId != "" {
-		query = query.Where("car_id = ?", carId)
-	}
-	if maker != "" {
-		query = query.Where("make = ?", maker)
-	}
-	if model != "" {
-		query = query.Where("model = ?", model)
-	}
-	if pricePerHour != "" {
-		query = query.Where("price_per_hour = ?", pricePerHour)
-	}
-	if pricePerDay != "" {
-		query = query.Where("price_per_day = ?", pricePerDay)
-	}
-	if capacity != "" {
-		query = query.Where("capacity = ?", capacity)
-	}
+
 	var cars []models.Car
-	query.Find(&cars)
+	database.DB.Find(&cars)
 	return c.Status(http.StatusOK).JSON(fiber.Map{
 		"message": "success",
 		"status":  http.StatusOK,

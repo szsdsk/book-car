@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="SqlDialectMappings">
+    <file url="file://$APPLICATION_CONFIG_DIR$/consoles/db/3c5f476e-8542-409f-9d20-4d3b1808a520/console_11.sql" dialect="PostgreSQL" />
+    <file url="file://$PROJECT_DIR$/src/controller/procedureController.go" dialect="GenericSQL" />
+  </component>
+</project>

@@ -21,6 +21,6 @@
 go.work
 
 
-*.idea
+.idea/*
 
-nicepage.css
+static/css/nicepage.css

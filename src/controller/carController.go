@@ -10,7 +10,6 @@ import (
 )
 
 func GetCars(c *fiber.Ctx) error {
-
 	var cars []models.Car
 	database.DB.Find(&cars)
 	return c.Status(http.StatusOK).JSON(fiber.Map{

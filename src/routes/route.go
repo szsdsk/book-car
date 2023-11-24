@@ -30,7 +30,7 @@ func InitRouter() {
 
 	app.Get("/index", controller.RenderCars)
 
-	app.Get("/:num", controller.NumberOfPassengers)
+	app.Get("/index/:num", controller.FilterCars)
 
 	api := app.Group("/api")
 	{

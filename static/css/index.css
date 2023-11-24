@@ -575,12 +575,13 @@ body {
    margin-bottom: 3.2rem;
  }
 
- .form {
-   font-size: 1.8rem;
-   line-height: 3.6rem;
-   color: #5b5b5b;
-   margin-bottom: 3.2rem;
- }
+.form {
+  text-align: center;
+  font-size: 1.8rem;
+  line-height: 3.6rem;
+  color: #5b5b5b;
+  margin-bottom: 3.2rem;
+}
 
 
 .text-centor {
@@ -590,7 +591,7 @@ body {
 .heading-secondary {
   font-size: 4.2rem;
   line-height: 1.2;
-  margin-bottom: 9.6rem;
+  margin-bottom: 3rem;
   letter-spacing: -0.5px;
 }
 

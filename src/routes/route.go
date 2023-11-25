@@ -62,6 +62,7 @@ func InitRouter() {
 	}
 	admin := app.Group("/admin")
 	{
+		admin.Get("/", controller.Admin)
 		admin.Get("/popular", controller.PopularLocatoins)
 		admin.Get("/trends", controller.RentalTrends)
 		admin.Post("/increase", controller.RentalIncrease)

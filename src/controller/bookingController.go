@@ -25,5 +25,4 @@ func CreateBookRecord(c *fiber.Ctx) error {
 		"message": "create successfully",
 		"status":  fiber.StatusOK,
 	})
-
 }

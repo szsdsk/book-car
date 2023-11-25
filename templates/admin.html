@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <title>Admin</title>
+    <link rel="stylesheet" href="../static/css/admin.css">
+</head>
+<body>
+<!--<div class="container">-->
+<!--    <h2>Customer on Probation</h2>-->
+<!--    <ul class="responsive-table">-->
+<!--        <li class="table-header">-->
+<!--            <div class="col col-1">Last Name</div>-->
+<!--            <div class="col col-2">First Name</div>-->
+<!--            <div class="col col-3">Email address </div>-->
+<!--        </li>-->
+<!--        {{range .customers}}-->
+<!--        <li class="table-row probation">-->
+<!--            <div class="col col-1" data-label="Last Name">{{.LastName}}</div>-->
+<!--            <div class="col col-2" data-label="First Name">{{.FirstName}}</div>-->
+<!--            <div class="col col-3" data-label="Email Address">{{.EmailAddress}}</div>-->
+<!--        </li>-->
+<!--        {{end}}-->
+<!--    </ul>-->
+<!--    <div class="page">-->
+<!--        <select id="itemsPerPage" onchange="onItemsPerPageChange()">-->
+<!--            <option value="5">5条/页</option>-->
+<!--            <option value="10" selected>10条/页</option>-->
+<!--            <option value="20">20条/页</option>-->
+<!--        </select>-->
+<!--        <ul class="pagination" id="pagination-container"></ul>-->
+<!--    </div>-->
+<!--</div>-->
+<!--<div class="container">-->
+<!--    <h2>Popular Locations</h2>-->
+<!--    <ul class="responsive-table">-->
+<!--        <li class="table-header">-->
+<!--            <div class="col col-1">Location ID</div>-->
+<!--            <div class="col col-2">Street Address</div>-->
+<!--            <div class="col col-3">Telephone</div>-->
+<!--            <div class="col col-4">Number of Rentals</div>-->
+<!--        </li>-->
+<!--        {{range .locations}}-->
+<!--        <li class="table-row">-->
+<!--            <div class="col col-1" data-lable="Location ID">{{.LocationId}}</div>-->
+<!--            <div class="col col-2" data-lable="Street Address">{{.StreetAddress}}</div>-->
+<!--            <div class="col col-3" data-lable="Telephone">{{.TelePhone}}</div>-->
+<!--            <div class="col col-4" data-lable="Number of Rentals">{{.NumberOfRentals}}</div>-->
+<!--        </li>-->
+<!--        {{end}}-->
+<!--    </ul>-->
+<!--    <div class="page">-->
+<!--        <select id="itemsPerPage" onchange="onItemsPerPageChange()">-->
+<!--            <option value="5">5条/页</option>-->
+<!--            <option value="10" selected>10条/页</option>-->
+<!--            <option value="20">20条/页</option>-->
+<!--        </select>-->
+<!--        <ul class="pagination" id="pagination-container"></ul>-->
+<!--    </div>-->
+<!--</div>-->
+<div class="container">
+    <h2>Rental Trends</h2>
+    <ul class="responsive-table">
+        <li class="table-header">
+            <div class="col col-1">Make</div>
+            <div class="col col-2">Model</div>
+            <div class="col col-3">Student?</div>
+            <div class="col col-4">Number of times rented</div>
+        </li>
+        {{range .trends}}
+        <li class="table-row trends">
+            <div class="col col-1" data-lable="Make">{{.Make_}}</div>
+            <div class="col col-2" data-lable="Model">{{.Model_}}</div>
+            <div class="col col-3" data-lable="Student?">{{.IsStudent_}}</div>
+            <div class="col col-4" data-lable="Number of times rented">{{.NumberOfTimesRented}}</div>
+        </li>
+        {{end}}
+    </ul>
+    <div class="page">
+        <select id="itemsPerPage" onchange="onItemsPerPageChange()">
+            <option value="5" selected>5条/页</option>
+            <option value="10">10条/页</option>
+            <option value="20">20条/页</option>
+        </select>
+        <ul class="pagination" id="pagination-container"></ul>
+    </div>
+</div>
+</body>
+<script type="application/javascript" src="../static/js/admin.js"></script>
+<script type="application/javascript" src="https://unpkg.com/axios@1.1.2/dist/axios.min.js"></script>
+</html>

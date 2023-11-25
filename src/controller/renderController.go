@@ -30,3 +30,37 @@ func FilterCars(c *fiber.Ctx) error {
 		"Cars": cars,
 	})
 }
+
+func Admin(c *fiber.Ctx) error {
+	type Probation struct {
+		FirstName    string `json:"first_name"`
+		LastName     string `json:"last_name"`
+		EmailAddress string `json:"email"`
+	}
+	var probation []Probation
+	database.DB.Raw(`SELECT * FROM customers_on_probation()`).Scan(&probation)
+
+	type Popular struct {
+		LocationId      int    `json:"locationId"`
+		StreetAddress   string `json:"stressAddress"`
+		TelePhone       string `json:"telePhone"`
+		NumberOfRentals int    `json:"numberOfRentals"`
+	}
+	var results []Popular
+	database.DB.Raw(`SELECT * FROM popular_locations()`).Scan(&results)
+
+	type Trends struct {
+		Make_               string `json:"make"`
+		Model_              string `json:"model"`
+		IsStudent_          bool   `json:"isStudent"`
+		NumberOfTimesRented int    `json:"numberOfTimesRented"`
+	}
+	var trends []Trends
+	database.DB.Raw(`SELECT * FROM rental_trends()`).Scan(&trends)
+
+	return c.Status(fiber.StatusOK).Render("admin", fiber.Map{
+		"customers": probation,
+		"locations": results,
+		"trends":    trends,
+	})
+}

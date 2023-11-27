@@ -11,9 +11,20 @@ map.set('trend', '#itemsPerPage3')
 map.set('probationContainer', '#pagination-container1')
 map.set('locationContainer', '#pagination-container2')
 map.set('trendContainer', '#pagination-container3')
-document.querySelector('.opt1').addEventListener('click', changeProbation)
-document.querySelector('.opt2').addEventListener('click', changeLocations)
-document.querySelector('.opt3').addEventListener('click', changeTrends)
+
+document.querySelector('.title').addEventListener('click', event => {
+    itemsPerPage = 5;
+    currentPage = 1;
+    let li = event.target.closest('li');
+    if (!li)
+        return;
+    if (!document.querySelector('.title').contains(li))
+        return;
+    curTable = li.dataset.table;
+    data = document.querySelectorAll(li.dataset.class);
+    totalPages = Math.ceil(data.length / itemsPerPage)
+    init();
+});
 
 function activeTable() {
     const titles = document.querySelector('.title').children;
@@ -27,32 +38,6 @@ function activeTable() {
     }
 }
 
-function changeTrends() {
-    itemsPerPage = 5;
-    currentPage = 1;
-    curTable = 'trend';
-    data = document.querySelectorAll('.trends');
-    totalPages = Math.ceil(data.length / itemsPerPage)
-    init();
-}
-
-function changeLocations() {
-    itemsPerPage = 5;
-    currentPage = 1;
-    curTable = 'location';
-    data = document.querySelectorAll('.locations');
-    totalPages = Math.ceil(data.length / itemsPerPage)
-    init();
-}
-
-function changeProbation() {
-    itemsPerPage = 5;
-    currentPage = 1;
-    curTable = 'probation'
-    data = document.querySelectorAll('.probation-');
-    totalPages = Math.ceil(data.length / itemsPerPage)
-    init();
-}
 
 // 初始化页面
 function init() {

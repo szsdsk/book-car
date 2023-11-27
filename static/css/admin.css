@@ -2,6 +2,10 @@ body {
     font-family: "lato", sans-serif;
 }
 
+* {
+    transition: opacity 0.3s, max-height 0.3s;
+}
+
 .container {
     max-width: 1000px;
     margin-left: auto;
@@ -121,9 +125,36 @@ h2 small {
     color: #fff;
 }
 
-#itemsPerPage {
+.select {
     border-radius: 5px;
     height: 30px;
     margin-bottom: 0;
     margin-right: 10px;
+}
+
+.title {
+    display: flex;
+    list-style: none;
+    padding: 0;
+}
+
+.title li {
+    line-height: 40px;
+    padding: 0 15px 0 15px;
+    border: 1px solid #ddd;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    vertical-align: top;
+    -webkit-transition: background-color .2s;
+    transition: background-color .2s;
+    cursor: pointer;
+}
+
+.title li.active {
+    background-color: #007bff;
+    color: #fff;
+}
+
+.title li:hover {
+    color: blue;
 }

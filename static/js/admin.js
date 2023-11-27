@@ -1,10 +1,70 @@
 const Left = -3, Right = 3;
 let itemsPerPage = 5;
 let currentPage = 1;
-const data = document.querySelectorAll('.trends')
-let totalPages = Math.ceil(data.length / itemsPerPage)
+let data = document.querySelectorAll('.probation-')
+let curTable = 'probation'
+let totalPages = Math.ceil(data.length / itemsPerPage);
+let map = new Map();
+map.set('probation', '#itemsPerPage1')
+map.set('location', '#itemsPerPage2')
+map.set('trend', '#itemsPerPage3')
+map.set('probationContainer', '#pagination-container1')
+map.set('locationContainer', '#pagination-container2')
+map.set('trendContainer', '#pagination-container3')
+document.querySelector('.opt1').addEventListener('click', changeProbation)
+document.querySelector('.opt2').addEventListener('click', changeLocations)
+document.querySelector('.opt3').addEventListener('click', changeTrends)
+
+function activeTable() {
+    const titles = document.querySelector('.title').children;
+    for (const title of titles) {
+        let name = title.querySelector('span').textContent.toLowerCase();
+        if (name.includes(curTable.toLowerCase())) {
+            title.classList.add('active');
+        } else {
+            title.classList.remove('active');
+        }
+    }
+}
+
+function changeTrends() {
+    itemsPerPage = 5;
+    currentPage = 1;
+    curTable = 'trend';
+    data = document.querySelectorAll('.trends');
+    totalPages = Math.ceil(data.length / itemsPerPage)
+    init();
+}
+
+function changeLocations() {
+    itemsPerPage = 5;
+    currentPage = 1;
+    curTable = 'location';
+    data = document.querySelectorAll('.locations');
+    totalPages = Math.ceil(data.length / itemsPerPage)
+    init();
+}
+
+function changeProbation() {
+    itemsPerPage = 5;
+    currentPage = 1;
+    curTable = 'probation'
+    data = document.querySelectorAll('.probation-');
+    totalPages = Math.ceil(data.length / itemsPerPage)
+    init();
+}
+
 // 初始化页面
 function init() {
+    for (let child of document.querySelector('.content').children) {
+        if (child.className !== curTable) {
+            child.style.display = 'none';
+        } else {
+            child.style.display = 'block';
+        }
+    }
+    activeTable();
+    document.querySelector(map.get(curTable)).firstElementChild.selected  = 'true';
     showPage(currentPage); // 默认显示第一页
     renderPagination(); // 渲染分页按钮
 }
@@ -27,7 +87,7 @@ function showPage(pageNumber) {
 }
 
 function renderPagination() {
-    const paginationContainer = document.getElementById('pagination-container');
+    const paginationContainer = document.querySelector(map.get(curTable+'Container'));
     paginationContainer.innerHTML = '';
     if (totalPages <= 7) {
         for (let i = 1; i <= totalPages; i++) {
@@ -74,7 +134,7 @@ function addPageLink(pageNumber) {
 
     const listItem = document.createElement('li');
     listItem.append(pageLink);
-    document.querySelector('#pagination-container').append(listItem);
+    document.querySelector(map.get(curTable+'Container')).append(listItem);
 }
 
 function addEllipsis(option) {
@@ -86,12 +146,12 @@ function addEllipsis(option) {
         showPage(currentPage + option);
         renderPagination();
     });
-    document.querySelector('#pagination-container').appendChild(document.createElement('li')).appendChild(ellipsis);
+    document.querySelector(map.get(curTable+'Container')).appendChild(document.createElement('li')).appendChild(ellipsis);
 }
 
 // 更新活动页按钮样式
 function updateActivePage(activePage) {
-    const paginationContainer = document.querySelector('#pagination-container');
+    const paginationContainer = document.querySelector(map.get(curTable+'Container'));
     const pageLinks = paginationContainer.querySelectorAll('a');
 
     for (let i = 0; i < pageLinks.length; i++) {
@@ -108,7 +168,7 @@ function updateActivePage(activePage) {
 
 // 处理每页显示数量变化
 function onItemsPerPageChange() {
-    itemsPerPage = parseInt(document.querySelector('#itemsPerPage').value);
+    itemsPerPage = parseInt(document.querySelector(map.get(curTable)).value);
     totalPages = Math.ceil(data.length / itemsPerPage);
     showPage(1); // 切换每页显示数量后，回到第一页
     renderPagination(); // 重新渲染分页按钮

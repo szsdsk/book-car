@@ -4,6 +4,7 @@ let currentPage = 1;
 let data = document.querySelectorAll('.probation-')
 let curTable = 'probation'
 let totalPages = Math.ceil(data.length / itemsPerPage);
+let size = data.length;
 let map = new Map();
 map.set('probation', '#itemsPerPage1')
 map.set('location', '#itemsPerPage2')
@@ -22,7 +23,8 @@ document.querySelector('.title').addEventListener('click', event => {
         return;
     curTable = li.dataset.table;
     data = document.querySelectorAll(li.dataset.class);
-    totalPages = Math.ceil(data.length / itemsPerPage)
+    size = data.length;
+    totalPages = Math.ceil(size / itemsPerPage)
     init();
 });
 
@@ -61,6 +63,7 @@ function hide() {
 }
 function showPage(pageNumber) {
     currentPage = pageNumber;
+    console.log(data.length);
     const startIndex = (pageNumber - 1) * itemsPerPage;
     const endIndex = startIndex + itemsPerPage;
     hide();
@@ -153,9 +156,28 @@ function updateActivePage(activePage) {
 
 // 处理每页显示数量变化
 function onItemsPerPageChange() {
+    console.log(size);
     itemsPerPage = parseInt(document.querySelector(map.get(curTable)).value);
-    totalPages = Math.ceil(data.length / itemsPerPage);
+    totalPages = Math.ceil(size / itemsPerPage);
     showPage(1); // 切换每页显示数量后，回到第一页
     renderPagination(); // 重新渲染分页按钮
 }
+
+// 筛选是否是学生
+function isStudent() {
+    hide();
+    let student = document.querySelector('.student').value;
+    let rawData = document.querySelectorAll('.trends');
+    if (student === 'Student?') {
+        data = rawData;
+    }
+    else {
+        data = Array.from(rawData).filter(st => st.querySelector('.col-3').textContent === student);
+    }
+    size = data.length;
+    totalPages = Math.ceil(size / itemsPerPage);
+    showPage(1);
+    renderPagination();
+}
+
 init();

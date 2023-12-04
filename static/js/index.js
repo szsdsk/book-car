@@ -16,7 +16,7 @@ form.addEventListener("submit", async function(ev) {
     ev.preventDefault();
     const size = +input.value;
     let response = await fetch(`/index/${size}`)
-    let data = await response.json()
+    let data = await response.json();
     const cardContainer = document.querySelector('.support-card-container');
     cardContainer.innerHTML = '';
     data.Cars.forEach(car => {

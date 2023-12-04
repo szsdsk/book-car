@@ -1,0 +1,101 @@
+const body = document.querySelector('body'),
+    form = document.querySelector('form'),
+    count = form.querySelectorAll('fieldset').length;
+
+
+
+
+function init() {
+    // 创建fieldset等量的li
+    const ul = document.querySelector('ul.items');
+    for (let i = 0; i < count; i++) {
+        let li = document.createElement('li');
+        ul.append(li);
+    }
+    // Add class active on first li
+    ul.firstElementChild.classList.add('active');
+}
+
+window.onload = init;
+
+function next(target) {
+    let input = target.previousElementSibling;
+
+    // Check if input is empty
+    if (input.value === "") {
+        body.classList.add("error");
+    } else {
+        body.classList.remove("error");
+
+        let enable = document.querySelector("form fieldset.enable"),
+            nextEnable = enable.nextElementSibling;
+        enable.classList.remove("enable");
+        enable.classList.add("disable");
+        nextEnable.classList.add("enable");
+
+        // Switch active class on left list
+        let active = document.querySelector("ul.items li.active"),
+            nextActive = active.nextElementSibling;
+        active.classList.remove("active");
+        nextActive.classList.add("active");
+    }
+}
+
+form.addEventListener("keydown", keyDown, false);
+function keyDown(event) {
+    let key = event.key,
+        target = document.querySelector("fieldset.enable .button");
+    if (key === 'Enter') {
+        event.preventDefault();
+        next(target);
+    }
+}
+form.addEventListener('click', function(event) {
+    let target = event.target || event.toElement;
+    if (target.classList.contains("button"))
+        next(target);
+});
+
+form.addEventListener("submit", async function(event) {
+    event.preventDefault();
+    const uid = form.elements["userName"].value;
+    const firstName = form.elements["firstName"].value;
+    const lastName = form.elements["lastName"].value;
+    const creditCard = form.elements["creditcard"].value;
+    const phone = form.elements["phone"].value;
+    const telephone = form.elements["telephone"].value;
+    const licence = form.elements["licence"].value;
+    const stateIssue = form.elements["stateissue"].value;
+    const isStudent = form.elements["job"].value === "student";
+    const tickets = form.elements["tickets"].value;
+    const expiration = form.elements["expiration"].value;
+    const carID = form.elements["carID"].value;
+    const email = form.elements["email"].value;
+    const address = form.elements["address"].value;
+    const locationID = form.elements["locationID"].value;
+    const formData = {
+        uid,
+        firstName,
+        lastName,
+        creditCard,
+        phone,
+        telephone,
+        licence,
+        stateIssue,
+        isStudent,
+        tickets,
+        expiration,
+        carID,
+        email,
+        address,
+        locationID
+    };
+    await fetch('your_server_endpoint', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(formData)
+    });
+    window.location.href = '/index';
+});

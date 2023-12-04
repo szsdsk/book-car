@@ -64,3 +64,13 @@ func Admin(c *fiber.Ctx) error {
 		"trends":    trends,
 	})
 }
+
+func BookingRender(c *fiber.Ctx) error {
+	carId := c.Params("id")
+	var locations []models.Location
+	database.DB.Find(&locations)
+	return c.Status(fiber.StatusOK).Render("booking", fiber.Map{
+		"carId":     carId,
+		"locations": locations,
+	})
+}

@@ -156,7 +156,6 @@ function updateActivePage(activePage) {
 
 // 处理每页显示数量变化
 function onItemsPerPageChange() {
-    console.log(size);
     itemsPerPage = parseInt(document.querySelector(map.get(curTable)).value);
     totalPages = Math.ceil(size / itemsPerPage);
     showPage(1); // 切换每页显示数量后，回到第一页
@@ -181,3 +180,7 @@ function isStudent() {
 }
 
 init();
+
+document.querySelector('#increase').addEventListener('click', async ev => {
+    await fetch('/admin/increase', {method:'PATCH'});
+})

@@ -32,6 +32,8 @@ func InitRouter() {
 
 	app.Get("/index/:num", controller.FilterCars)
 
+	app.Get("/booking/:id", controller.BookingRender)
+
 	api := app.Group("/api")
 	{
 		car := api.Group("/cars")
@@ -65,7 +67,7 @@ func InitRouter() {
 		admin.Get("/", controller.Admin)
 		admin.Get("/popular", controller.PopularLocatoins)
 		admin.Get("/trends", controller.RentalTrends)
-		admin.Post("/increase", controller.RentalIncrease)
+		admin.Patch("/increase", controller.RentalIncrease)
 	}
 	err := app.Listen(":8080")
 	if err != nil {

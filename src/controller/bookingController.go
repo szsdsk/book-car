@@ -26,3 +26,8 @@ func CreateBookRecord(c *fiber.Ctx) error {
 		"status":  fiber.StatusOK,
 	})
 }
+
+//func UpdateBookRecord(c *fiber.Ctx) {
+//	var record models.BookRecord
+//
+//}

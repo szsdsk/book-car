@@ -9,6 +9,10 @@ body {
     height: 100%;
     background-image: linear-gradient(to right, #fbc2eb, #a6c1ee);
 }
+body.error fieldset {
+    box-shadow: 0 8px 10px red;
+}
+
 .login-wrapper {
     background-color: #fff;
     width: 358px;
@@ -96,7 +100,13 @@ ul.items li.active {
 
 .margin-top{
     margin-top: 10px;
+    margin-bottom: 5px;
 }
+.other {
+    margin-top: 1px;
+    margin-bottom: 1px;
+}
+
 form {
     position: absolute;
     width: 300px;
@@ -136,6 +146,13 @@ form fieldset p {
 form fieldset input {
     height: 40px;
     margin-top: 8px;
+    border: none;
+    outline: none;
+}
+
+form fieldset input.special {
+    height: 40px;
+    margin-top: 0;
     border: none;
     outline: none;
 }

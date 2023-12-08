@@ -1,32 +1,56 @@
 const body = document.querySelector('body'),
     form = document.querySelector('form'),
-    count = form.querySelectorAll('fieldset').length;
-
-
-
-
+    fieldset = form.querySelectorAll('fieldset'),
+    count = fieldset.length;
+const map = new Map();
+const index = new Map();
 function init() {
     // 创建fieldset等量的li
     const ul = document.querySelector('ul.items');
     for (let i = 0; i < count; i++) {
         let li = document.createElement('li');
+        map.set(li, fieldset[i]);
+        index.set(li, i);
         ul.append(li);
     }
     // Add class active on first li
     ul.firstElementChild.classList.add('active');
 }
 
+document.querySelector('ul.items').addEventListener('click', event => {
+    let target = event.target.closest('li');
+    let active = document.querySelector("ul.items li.active");
+    target.classList.add('active');
+    active.classList.remove('active');
+    map.get(target).classList.add('enable');
+    map.get(active).classList.remove('enable');
+});
+
+document.addEventListener('wheel', event => {
+    let active = document.querySelector("ul.items li.active");
+    if (event.deltaY < 0 && index.get(active) > 0) {
+        active.classList.remove('active');
+        map.get(active).classList.remove('enable');
+        active.previousElementSibling.classList.add('active');
+        map.get(active).previousElementSibling.classList.add('enable');
+    } else if (event.deltaY > 0 && index.get(active) < count - 1) {
+        active.classList.remove('active');
+        map.get(active).classList.remove('enable');
+        active.nextElementSibling.classList.add('active');
+        map.get(active).nextElementSibling.classList.add('enable');
+    }
+
+});
+
 window.onload = init;
 
 function next(target) {
     let input = target.previousElementSibling;
-
     // Check if input is empty
     if (input.value === "") {
         body.classList.add("error");
     } else {
         body.classList.remove("error");
-
         let enable = document.querySelector("form fieldset.enable"),
             nextEnable = enable.nextElementSibling;
         enable.classList.remove("enable");
@@ -51,7 +75,7 @@ function keyDown(event) {
     }
 }
 form.addEventListener('click', function(event) {
-    let target = event.target || event.toElement;
+    let target = event.target.closest('div');
     if (target.classList.contains("button"))
         next(target);
 });

@@ -19,46 +19,46 @@
         <ul class="items"></ul>
         <fieldset class="username enable">
             <div class="icon left"><i class="user"></i></div>
-            <input type="text" name="userName" placeholder="Username" />
+            <input type="text" name="userName" placeholder="Username" required>
             <div class="icon right button"><i class="arrow"></i></div>
         </fieldset>
         <fieldset class="email">
             <div class="icon left"><i class="letter"></i></div>
-            <input type="email" name="email" placeholder="Email" />
+            <input type="email" name="email" placeholder="Email" required>
             <div class="icon right button"><i class="arrow"></i></div>
         </fieldset>
         <fieldset class="first-name">
-            <input type="text" name="firstName" placeholder="First name" />
+            <input type="text" name="firstName" placeholder="First name" required>
             <div class="icon right button"><i class="arrow"></i></div>
         </fieldset>
         <fieldset class="last-name">
-            <input type="text" name="lastName" placeholder="last name" />
+            <input type="text" name="lastName" placeholder="last name" required>
             <div class="icon right button"><i class="arrow"></i></div>
         </fieldset>
         <fieldset class="address">
             <div class="icon left"><i class="user"></i></div>
-            <input type="text" name="address" placeholder="Address" />
+            <input type="text" name="address" placeholder="Address" required>
             <div class="icon right button"><i class="arrow"></i></div>
         </fieldset>
         <fieldset class="creditcard">
-            <input type="text" name="creditcard" placeholder="creditcard number" />
+            <input type="text" name="creditcard" placeholder="creditcard number" required>
             <div class="icon right button"><i class="arrow"></i></div>
         </fieldset>
         <fieldset class="phone">
-            <input type="text" name="phone" placeholder="phone number" />
+            <input type="text" name="phone" placeholder="phone number" required>
             <div class="icon right button"><i class="arrow"></i></div>
         </fieldset>
         <fieldset class="telephone">
-            <input type="text" name="telephone" placeholder="telephone number" />
+            <input type="text" name="telephone" placeholder="telephone number" required>
             <div class="icon right button"><i class="arrow"></i></div>
         </fieldset>
         <fieldset class="licence">
-            <input type="text" name="licence" placeholder="licence number" />
+            <input type="text" name="licence" placeholder="licence number" required>
             <div class="icon right button"><i class="arrow"></i></div>
         </fieldset>
         <fieldset class="stateissue">
             <p class="margin-top">stateissue</p>
-            <select id="stateissue" name="stateissue">
+            <select id="stateissue" name="stateissue" required>
                 <option value="AL">AL</option>
                 <option value="AK">AK</option>
                 <option value="AZ">AZ</option>
@@ -114,27 +114,29 @@
         </fieldset>
         <fieldset class="job">
             <p class="margin-top">job</p>
-            <select id="job" name="job">
+            <select id="job" name="job" required>
                 <option value="student">student</option>
                 <option value="other">other</option>
             </select>
             <div class="icon right button"><i class="arrow"></i></div>
         </fieldset>
         <fieldset class="tickets">
-            <input type="number" name="tickets" placeholder="tickets">
+            <input type="number" name="tickets" placeholder="tickets" required>
             <div class="icon right button"><i class="arrow"></i></div>
         </fieldset>
         <fieldset class="expiration-date">
-            <input type="date" name="expiration" placeholder="expiration-date">
+            <p class="other">expiration-date</p>
+            <input class="special" type="datetime-local" name="expiration" placeholder="expiration-date" required>
             <div class="icon right button"><i class="arrow"></i></div>
         </fieldset>
         <fieldset class="carID">
-            <input type="text" name="carID" value="{{.carId}}" readonly>
+            <p class="other">carID</p>
+            <input class="special" type="text" name="carID" value="{{.carId}}" readonly>
             <div class="icon right button"><i class="arrow"> </i></div>
         </fieldset>
         <fieldset class="locationId">
             <p class="margin-top">job</p>
-            <select id="locationId" name="locationID">
+            <select id="locationId" name="locationID" required>
                 {{range .locations}}
                     <option value="{{.StreetAddress}}">{{.StreetAddress}}</option>
                 {{end}}
@@ -143,7 +145,7 @@
         </fieldset>
         <fieldset class="thanks">
             <div class="icon left"><i class="heart"></i></div>
-            <input type="submit" value="submit" />
+            <input type="submit" value="submit" required>
             <div class="icon right"><i class="heart"></i></div>
         </fieldset>
     </form>

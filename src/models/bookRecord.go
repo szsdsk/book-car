@@ -7,7 +7,7 @@ type BookRecord struct {
 	PricePerHour   float64   `json:"pricePerHour" gorm:"type:real;not null"`
 	PricePerDay    float64   `json:"pricePerDay" gorm:"type:real;not null"`
 	ReservedDate   time.Time `json:"reservedDate" gorm:"type:timestamp with time zone;not null"`
-	PickUpTime     time.Time `json:"PickUpTime" gorm:"type:timestamp with time zone"`
+	PickUpTime     time.Time `json:"pickUpTime" gorm:"type:timestamp with time zone"`
 	DropOfTime     time.Time `json:"dropOfTime" gorm:"type:timestamp with time zone"`
 	CreateAt       time.Time `json:"-" gorm:"type:timestamp with time zone;not null;autoCreateTime"`
 	UpdateAt       time.Time `json:"-" gorm:"type:timestamp with time zone;not null;autoUpdateTime"`

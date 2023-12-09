@@ -10,7 +10,7 @@ type Customer struct {
 	Email      string    `json:"email" gorm:"type:varchar(255); not null"`
 	CreditCard string    `json:"creditCard" gorm:"type:varchar(255); not null"`
 	IsStudent  *bool     `json:"isStudent" gorm:"type:boolean; not null"`
-	TelePhone  string    `json:"telePhone" gorm:"type:varchar(255); not null"`
+	Telephone  string    `json:"telephone" gorm:"type:varchar(255); not null"`
 	Phone      string    `json:"phone" gorm:"type:varchar(255); not null"`
 	Licence    int       `json:"licence" gorm:"type:integer;not null"`
 	Tickets    int       `json:"tickets" gorm:"type:integer;not null"`

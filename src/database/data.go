@@ -36,7 +36,7 @@ func initData() {
 				PricePerDay:  pricePerDay,
 				Capacity:     capacity,
 				Description:  cells[headerMap["Description"]].String(),
-				Img:          "",
+				Img:          cells[headerMap["Img"]].String(),
 			}
 			locationId, _ := cells[headerMap["Location ID"]].Int()
 			location := models.Location{
@@ -55,7 +55,7 @@ func initData() {
 				Email:      cells[headerMap["Email Address"]].String(),
 				CreditCard: cells[headerMap["Credit Card"]].String(),
 				IsStudent:  &student,
-				TelePhone:  cells[headerMap["Customers_Telephone"]].String(),
+				Telephone:  cells[headerMap["Customers_Telephone"]].String(),
 				Phone:      cells[headerMap["Cell Phone"]].String(),
 				Licence:    license,
 				Tickets:    tickets,

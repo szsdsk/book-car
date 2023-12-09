@@ -53,7 +53,7 @@
             <div class="icon right button"><i class="arrow"></i></div>
         </fieldset>
         <fieldset class="licence">
-            <input type="text" name="licence" placeholder="licence number" required>
+            <input type="number" name="licence" placeholder="licence number" required>
             <div class="icon right button"><i class="arrow"></i></div>
         </fieldset>
         <fieldset class="stateissue">
@@ -126,7 +126,7 @@
         </fieldset>
         <fieldset class="expiration-date">
             <p class="other">expiration-date</p>
-            <input class="special" type="datetime-local" name="expiration" placeholder="expiration-date" required>
+            <input class="special" type="date" name="expiration" placeholder="expiration-date" required>
             <div class="icon right button"><i class="arrow"></i></div>
         </fieldset>
         <fieldset class="carID">
@@ -135,12 +135,22 @@
             <div class="icon right button"><i class="arrow"> </i></div>
         </fieldset>
         <fieldset class="locationId">
-            <p class="margin-top">job</p>
+            <p class="margin-top">Location</p>
             <select id="locationId" name="locationID" required>
                 {{range .locations}}
-                    <option value="{{.StreetAddress}}">{{.StreetAddress}}</option>
+                    <option value="{{.Id}}">{{.StreetAddress}}</option>
                 {{end}}
             </select>
+            <div class="icon right button"><i class="arrow"></i></div>
+        </fieldset>
+        <fieldset class="startTime">
+            <p class="other">start-time</p>
+            <input class="special" type="datetime-local" name="startTime" placeholder="startTime" required>
+            <div class="icon right button"><i class="arrow"></i></div>
+        </fieldset>
+        <fieldset class="endTime">
+            <p class="other">start-time</p>
+            <input class="special" type="datetime-local" name="endTime" placeholder="endTime" required>
             <div class="icon right button"><i class="arrow"></i></div>
         </fieldset>
         <fieldset class="thanks">

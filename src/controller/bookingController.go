@@ -3,7 +3,10 @@ package controller
 import (
 	"acs/src/database"
 	"acs/src/models"
+	"fmt"
 	"github.com/gofiber/fiber/v2"
+	"log"
+	"time"
 )
 
 func GetBookRecords(c *fiber.Ctx) error {
@@ -27,7 +30,31 @@ func CreateBookRecord(c *fiber.Ctx) error {
 	})
 }
 
-//func UpdateBookRecord(c *fiber.Ctx) {
-//	var record models.BookRecord
-//
-//}
+func SubmitBookRecord(c *fiber.Ctx) error {
+	var record models.BookRecord
+	var user models.Customer
+	var car models.Car
+	if err := c.BodyParser(&record); err != nil {
+		log.Fatal(err)
+		return err
+	}
+	if err := c.BodyParser(&user); err != nil {
+		log.Fatal(err)
+		return err
+	}
+	database.DB.Model(&models.Car{}).Where("id = ?", record.CarId).First(&car)
+	record.PricePerHour = car.PricePerHour
+	record.PricePerDay = car.PricePerDay
+	record.CustomerId = user.Uid
+	var count int64
+	database.DB.Model(&models.BookRecord{}).Count(&count)
+	record.ReservationNum = time.Now().Format("Jan") + fmt.Sprintf("-%03d", count)
+	if database.DB.Where("uid = ?", user.Uid).First(&models.Customer{}).RowsAffected == 0 {
+		database.DB.Create(&user)
+	}
+	database.DB.Create(&record)
+	return c.Status(fiber.StatusOK).JSON(fiber.Map{
+		"message": "book successfully",
+		"status":  fiber.StatusOK,
+	})
+}

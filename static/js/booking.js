@@ -88,15 +88,17 @@ form.addEventListener("submit", async function(event) {
     const creditCard = form.elements["creditcard"].value;
     const phone = form.elements["phone"].value;
     const telephone = form.elements["telephone"].value;
-    const licence = form.elements["licence"].value;
+    const licence = Number(form.elements["licence"].value);
     const stateIssue = form.elements["stateissue"].value;
     const isStudent = form.elements["job"].value === "student";
-    const tickets = form.elements["tickets"].value;
-    const expiration = form.elements["expiration"].value;
-    const carID = form.elements["carID"].value;
+    const tickets = Number(form.elements["tickets"].value);
+    const expiration = new Date(form.elements["expiration"].value);
+    const carId = Number(form.elements["carID"].value);
     const email = form.elements["email"].value;
     const address = form.elements["address"].value;
-    const locationID = form.elements["locationID"].value;
+    const locationId = Number(form.elements["locationId"].value);
+    const pickUpTime = new Date(form.elements["startTime"].value);
+    const dropOfTime = new Date(form.elements["endTime"].value);
     const formData = {
         uid,
         firstName,
@@ -109,17 +111,19 @@ form.addEventListener("submit", async function(event) {
         isStudent,
         tickets,
         expiration,
-        carID,
+        pickUpTime,
+        dropOfTime,
+        carId,
         email,
         address,
-        locationID
+        locationId
     };
-    await fetch('your_server_endpoint', {
+    await fetch('/booking/submit', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
         },
         body: JSON.stringify(formData)
     });
-    window.location.href = '/index';
+    // window.location.href = '/index';
 });

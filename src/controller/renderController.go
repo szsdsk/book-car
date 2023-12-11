@@ -6,6 +6,7 @@ import (
 	"github.com/gofiber/fiber/v2"
 )
 
+// RenderCars 返回所有车辆数据，将数据返回给前端，用于渲染模板引擎。
 func RenderCars(c *fiber.Ctx) error {
 	var cars []models.Car
 	database.DB.Order("capacity").Find(&cars)
@@ -14,6 +15,7 @@ func RenderCars(c *fiber.Ctx) error {
 	})
 }
 
+// FilterCars 返回座位数大于等于所给值车辆数据
 func FilterCars(c *fiber.Ctx) error {
 	num := c.Params("num")
 	var cars []models.Car
@@ -23,14 +25,12 @@ func FilterCars(c *fiber.Ctx) error {
 		database.DB.Where("capacity >= ?", num).Order("capacity").Find(&cars)
 	}
 
-	//return c.Status(http.StatusOK).Render("index", fiber.Map{
-	//	"Cars": cars,
-	//})
 	return c.Status(fiber.StatusOK).JSON(fiber.Map{
 		"Cars": cars,
 	})
 }
 
+// Admin admin界面的三个表，返回给前端渲染。
 func Admin(c *fiber.Ctx) error {
 	type Probation struct {
 		FirstName    string `json:"first_name"`

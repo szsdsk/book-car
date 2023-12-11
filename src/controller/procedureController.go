@@ -8,6 +8,7 @@ import (
 	"strconv"
 )
 
+// CustomersOnProbation 调用存储过程，将处于观察期的用户数据返回给前端
 func CustomersOnProbation(c *fiber.Ctx) error {
 	type Probation struct {
 		FirstName    string `json:"first_name"`
@@ -24,6 +25,7 @@ func CustomersOnProbation(c *fiber.Ctx) error {
 	})
 }
 
+// NumberOfPassengers 调用存储过程，输入人数，将大于等于该人数的车辆数据返回给前端
 func NumberOfPassengers(c *fiber.Ctx) error {
 	num := c.Params("num")
 	res, _ := strconv.Atoi(num)
@@ -45,6 +47,7 @@ func NumberOfPassengers(c *fiber.Ctx) error {
 	})
 }
 
+// PopularLocatoins 调用存储过程，统计并返回每个地点被预订的个数
 func PopularLocatoins(c *fiber.Ctx) error {
 	//TABLE(location_id bigint, street_address character
 	//varying, tele_phone character varying, number_of_rentals bigint)
@@ -63,6 +66,7 @@ func PopularLocatoins(c *fiber.Ctx) error {
 	})
 }
 
+// RentalTrends 调用存储过程，实现功能
 func RentalTrends(c *fiber.Ctx) error {
 	//TABLE(make_ character varying, model_ character varying,
 	//"isStudent?" boolean, number_of_times_rented bigint)
@@ -81,6 +85,7 @@ func RentalTrends(c *fiber.Ctx) error {
 	})
 }
 
+// RentalTrends 调用存储过程，是预定价格上升。
 func RentalIncrease(c *fiber.Ctx) error {
 	database.DB.Exec(`CALL rental_increase()`)
 	return c.Status(http.StatusOK).JSON(fiber.Map{

@@ -11,6 +11,7 @@ import (
 
 var DB *gorm.DB
 
+// Connect 根据参数连接数据库，生成创建的表格，并将xlsx中数据导入数据库。
 func Connect() {
 	dsn := fmt.Sprintf("host=%s user=%s password=%s dbname=%s port=%s sslmode=%s TimeZone=Asia/Shanghai",
 		utils.DbHost,

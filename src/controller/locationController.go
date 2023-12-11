@@ -6,6 +6,7 @@ import (
 	"github.com/gofiber/fiber/v2"
 )
 
+// GetLocations 获得所有地点数据
 func GetLocations(c *fiber.Ctx) error {
 	var locations []models.Location
 	database.DB.Find(&locations)
@@ -15,6 +16,7 @@ func GetLocations(c *fiber.Ctx) error {
 	})
 }
 
+// GetLocations 创建地点数据
 func CreateLocation(c *fiber.Ctx) error {
 	var location models.Location
 	if err := c.BodyParser(&location); err != nil {

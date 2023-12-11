@@ -2,6 +2,7 @@
 
 const form = document.querySelector("form")
 const input = document.querySelector("#get-num")
+// 为每个按钮添加事件，使其可以跳转到预定页面。
 function addEvent() {
     const buttons = document.querySelectorAll(".btn--full")
     buttons.forEach(button => {
@@ -12,6 +13,7 @@ function addEvent() {
 }
 
 addEvent();
+// 筛选汽车后，将数据显示出来
 form.addEventListener("submit", async function(ev) {
     ev.preventDefault();
     const size = +input.value;
@@ -60,7 +62,7 @@ form.addEventListener("submit", async function(ev) {
 
         // 创建按钮元素
         const button = document.createElement('button');
-        button.id = car.Id;
+        button.id = car.carId;
         button.classList.add('btn', 'btn--full');
         button.textContent = 'Book Now';
 

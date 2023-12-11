@@ -8,13 +8,14 @@ import (
 	"net/http"
 )
 
+// 选择模板引擎
 func createMyRender() *html.Engine {
 	engine := html.New("./templates", ".html")
 	return engine
 }
 
+// InitRouter 创建app示例，并配置接口，中间件，接听端口等。
 func InitRouter() {
-	//创建app实例
 	app := fiber.New(fiber.Config{
 		Views: createMyRender(), //渲染html模板
 	})

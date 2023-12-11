@@ -13,6 +13,7 @@ map.set('probationContainer', '#pagination-container1')
 map.set('locationContainer', '#pagination-container2')
 map.set('trendContainer', '#pagination-container3')
 
+// 事件委托，判断点击事件，转到相应的表
 document.querySelector('.title').addEventListener('click', event => {
     itemsPerPage = 5;
     currentPage = 1;
@@ -28,6 +29,7 @@ document.querySelector('.title').addEventListener('click', event => {
     init();
 });
 
+// 显示某一个表
 function activeTable() {
     const titles = document.querySelector('.title').children;
     for (const title of titles) {
@@ -56,11 +58,13 @@ function init() {
     renderPagination(); // 渲染分页按钮
 }
 
+// 隐藏所有表。
 function hide() {
     data.forEach(li => {
         li.style.display = 'none';
     })
 }
+// 显示表的相应数据
 function showPage(pageNumber) {
     currentPage = pageNumber;
     console.log(data.length);
@@ -74,6 +78,7 @@ function showPage(pageNumber) {
     }
 }
 
+// 根据数据条数渲染页码
 function renderPagination() {
     const paginationContainer = document.querySelector(map.get(curTable+'Container'));
     paginationContainer.innerHTML = '';
@@ -110,6 +115,7 @@ function renderPagination() {
     updateActivePage(currentPage);
 }
 
+// 增加链接
 function addPageLink(pageNumber) {
     const pageLink = document.createElement('a');
     pageLink.href = '#';
@@ -125,6 +131,7 @@ function addPageLink(pageNumber) {
     document.querySelector(map.get(curTable+'Container')).append(listItem);
 }
 
+// 页数太多用...表示
 function addEllipsis(option) {
     const ellipsis = document.createElement('a');
     ellipsis.textContent = '...';
@@ -181,6 +188,7 @@ function isStudent() {
 
 init();
 
+// 更新价格就是发送一个请求。
 document.querySelector('#increase').addEventListener('click', async ev => {
     await fetch('/admin/increase', {method:'PATCH'});
 })

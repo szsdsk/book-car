@@ -10,6 +10,7 @@ import (
 	"time"
 )
 
+// GetBookRecords 获得所有预订记录
 func GetBookRecords(c *fiber.Ctx) error {
 	var bookRecodes []models.BookRecord
 	database.DB.Preload("Car").Preload("Customer").Preload("Location").Find(&bookRecodes)
@@ -19,6 +20,7 @@ func GetBookRecords(c *fiber.Ctx) error {
 	})
 }
 
+// CreateBookRecord 创建预订记录
 func CreateBookRecord(c *fiber.Ctx) error {
 	var record models.BookRecord
 	if err := c.BodyParser(&record); err != nil {
@@ -31,6 +33,7 @@ func CreateBookRecord(c *fiber.Ctx) error {
 	})
 }
 
+// SubmitBookRecord 根据前端传入的信息，创建记录，信息中的用户没在数据库中，加入数据库。
 func SubmitBookRecord(c *fiber.Ctx) error {
 	var record models.BookRecord
 	var user models.Customer

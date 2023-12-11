@@ -22,6 +22,7 @@ func init() {
 	LoadData(file)
 }
 
+// LoadData 读取配置文件，更好的连接数据库。
 func LoadData(file *ini.File) {
 	DbHost = file.Section("database").Key("DbHost").MustString("localhost")
 	DbPort = file.Section("database").Key("DbPost").MustString("5432")

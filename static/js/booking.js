@@ -6,11 +6,15 @@ const map = new Map();
 const index = new Map();
 const message = document.querySelector('.el-message-box__wrapper');
 const wrapper = document.querySelector('.v-modal');
+
+// 点击确定返回主页
 document.querySelector('.el-button--primary').addEventListener('click', () => {
     message.style.display = 'none';
     wrapper.style.display = 'none';
     window.location.href = '/index';
 });
+
+// 渲染表格
 function init() {
     // 创建fieldset等量的li
     const ul = document.querySelector('ul.items');
@@ -24,6 +28,7 @@ function init() {
     ul.firstElementChild.classList.add('active');
 }
 
+// 点击相应的点跳到某一项
 document.querySelector('ul.items').addEventListener('click', event => {
     let target = event.target.closest('li');
     let active = document.querySelector("ul.items li.active");
@@ -40,6 +45,7 @@ document.querySelector('ul.items').addEventListener('click', event => {
     }
 });
 
+// 鼠标滚轮滑动切换数据
 document.addEventListener('wheel', event => {
     let active = document.querySelector("ul.items li.active");
     if (event.deltaY < 0 && index.get(active) > 0) {
@@ -66,6 +72,7 @@ document.addEventListener('wheel', event => {
 
 window.onload = init;
 
+// 进入下一项
 function next(target) {
     let input = target.previousElementSibling;
     // Check if input is empty
@@ -88,7 +95,7 @@ function next(target) {
         nextActive.classList.add("active");
     }
 }
-
+// 回车也可以到下一项
 form.addEventListener("keydown", keyDown, false);
 function keyDown(event) {
     let key = event.key,
@@ -98,12 +105,14 @@ function keyDown(event) {
         next(target);
     }
 }
+// 点击按钮也可以到下一项
 form.addEventListener('click', function(event) {
     let target = event.target.closest('div');
     if (target.classList.contains("button"))
         next(target);
 });
 
+// 发送请求，用于新创建记录
 form.addEventListener("submit", async function(event) {
     event.preventDefault();
     const uid = form.elements["userName"].value;

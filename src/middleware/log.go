@@ -6,6 +6,7 @@ import (
 	"log"
 )
 
+// MyLog 中间件，记录接收到的请求。
 func MyLog(c *fiber.Ctx) error {
 	// 获取方法
 	method := c.Method()

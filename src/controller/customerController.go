@@ -6,6 +6,7 @@ import (
 	"github.com/gofiber/fiber/v2"
 )
 
+// GetCustomers 获得用户数据
 func GetCustomers(c *fiber.Ctx) error {
 	var customers []models.Customer
 	database.DB.Find(&customers)
@@ -15,6 +16,7 @@ func GetCustomers(c *fiber.Ctx) error {
 	})
 }
 
+// CreateCustomer 创建用户数据
 func CreateCustomer(c *fiber.Ctx) error {
 	var customer models.Customer
 	if err := c.BodyParser(&customer); err != nil {
@@ -25,5 +27,4 @@ func CreateCustomer(c *fiber.Ctx) error {
 		"message": "create successfully",
 		"status":  fiber.StatusOK,
 	})
-
 }

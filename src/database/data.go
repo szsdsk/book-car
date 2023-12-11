@@ -7,6 +7,7 @@ import (
 	"time"
 )
 
+// initData 将xlsx中的数据导入数据库
 func initData() {
 	xl, err := xlsx.OpenFile("./data/data.xlsx")
 	if err != nil {

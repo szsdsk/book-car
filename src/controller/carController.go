@@ -9,6 +9,7 @@ import (
 	"time"
 )
 
+// GetCars 获得所有车辆数据
 func GetCars(c *fiber.Ctx) error {
 	var cars []models.Car
 	database.DB.Find(&cars)
@@ -19,6 +20,7 @@ func GetCars(c *fiber.Ctx) error {
 	})
 }
 
+// CreateCar 创建车辆数据
 func CreateCar(c *fiber.Ctx) error {
 	var car models.Car
 	// 传入car的指针，将传来的JSON赋值给car对象。
@@ -47,6 +49,7 @@ func CreateCar(c *fiber.Ctx) error {
 	})
 }
 
+// UpdateCar 更新车辆数据
 func UpdateCar(c *fiber.Ctx) error {
 	id := c.Params("id")
 	var car models.Car
@@ -63,6 +66,7 @@ func UpdateCar(c *fiber.Ctx) error {
 	})
 }
 
+// DeleteCar 删除车辆数据
 func DeleteCar(c *fiber.Ctx) error {
 	id := c.Params("id")
 	database.DB.Delete(&models.Car{}, id)

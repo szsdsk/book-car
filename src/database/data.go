@@ -8,7 +8,7 @@ import (
 )
 
 func initData() {
-	xl, err := xlsx.OpenFile("./data/CarShareReservation.xlsx")
+	xl, err := xlsx.OpenFile("./data/data.xlsx")
 	if err != nil {
 		log.Fatal(err)
 	}

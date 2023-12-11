@@ -4,6 +4,13 @@ const body = document.querySelector('body'),
     count = fieldset.length;
 const map = new Map();
 const index = new Map();
+const message = document.querySelector('.el-message-box__wrapper');
+const wrapper = document.querySelector('.v-modal');
+document.querySelector('.el-button--primary').addEventListener('click', () => {
+    message.style.display = 'none';
+    wrapper.style.display = 'none';
+    window.location.href = '/index';
+});
 function init() {
     // 创建fieldset等量的li
     const ul = document.querySelector('ul.items');
@@ -20,10 +27,17 @@ function init() {
 document.querySelector('ul.items').addEventListener('click', event => {
     let target = event.target.closest('li');
     let active = document.querySelector("ul.items li.active");
+    if (target === active) {
+        return;
+    }
     target.classList.add('active');
     active.classList.remove('active');
     map.get(target).classList.add('enable');
     map.get(active).classList.remove('enable');
+    let input = map.get(target).querySelector("input");
+    if (input !== null) {
+        input.focus();
+    }
 });
 
 document.addEventListener('wheel', event => {
@@ -33,11 +47,19 @@ document.addEventListener('wheel', event => {
         map.get(active).classList.remove('enable');
         active.previousElementSibling.classList.add('active');
         map.get(active).previousElementSibling.classList.add('enable');
+        let input = map.get(active).previousElementSibling.querySelector("input");
+        if (input !== null) {
+            input.focus();
+        }
     } else if (event.deltaY > 0 && index.get(active) < count - 1) {
         active.classList.remove('active');
         map.get(active).classList.remove('enable');
         active.nextElementSibling.classList.add('active');
         map.get(active).nextElementSibling.classList.add('enable');
+        let input = map.get(active).nextElementSibling.querySelector("input");
+        if (input !== null) {
+            input.focus();
+        }
     }
 
 });
@@ -54,9 +76,11 @@ function next(target) {
         let enable = document.querySelector("form fieldset.enable"),
             nextEnable = enable.nextElementSibling;
         enable.classList.remove("enable");
-        enable.classList.add("disable");
         nextEnable.classList.add("enable");
-
+        let input = nextEnable.querySelector("input");
+        if (input !== null) {
+            input.focus();
+        }
         // Switch active class on left list
         let active = document.querySelector("ul.items li.active"),
             nextActive = active.nextElementSibling;
@@ -99,6 +123,10 @@ form.addEventListener("submit", async function(event) {
     const locationId = Number(form.elements["locationId"].value);
     const pickUpTime = new Date(form.elements["startTime"].value);
     const dropOfTime = new Date(form.elements["endTime"].value);
+    if (pickUpTime < dropOfTime) {
+        alert('还车时间小于取车时间')
+        return
+    }
     const formData = {
         uid,
         firstName,
@@ -118,12 +146,15 @@ form.addEventListener("submit", async function(event) {
         address,
         locationId
     };
-    await fetch('/booking/submit', {
+    let response = await fetch('/booking/submit', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
         },
         body: JSON.stringify(formData)
     });
-    // window.location.href = '/index';
+    let json = await response.json();
+    message.style.display = 'flex';
+    wrapper.style.display = 'block';
+    document.querySelector('.price').innerText =" 此次预订的价格为：" + json.data.price + "。 点击确定返回首页。"
 });

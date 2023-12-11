@@ -6,6 +6,7 @@ import (
 	"fmt"
 	"github.com/gofiber/fiber/v2"
 	"log"
+	"math"
 	"time"
 )
 
@@ -52,9 +53,15 @@ func SubmitBookRecord(c *fiber.Ctx) error {
 	if database.DB.Where("uid = ?", user.Uid).First(&models.Customer{}).RowsAffected == 0 {
 		database.DB.Create(&user)
 	}
+	record.ReservedDate = time.Now()
 	database.DB.Create(&record)
+	Hours := math.Ceil(record.DropOfTime.Sub(record.PickUpTime).Hours())
+	price := math.Floor(Hours/24)*record.PricePerDay + float64(int(Hours)%24)*record.PricePerHour
 	return c.Status(fiber.StatusOK).JSON(fiber.Map{
 		"message": "book successfully",
-		"status":  fiber.StatusOK,
+		"data": fiber.Map{
+			"price": price,
+		},
+		"status": fiber.StatusOK,
 	})
 }

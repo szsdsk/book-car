@@ -1,6 +1,7 @@
 package database
 
 import (
+	"acs/src/models"
 	"acs/src/utils"
 	"fmt"
 	"gorm.io/driver/postgres"
@@ -31,9 +32,9 @@ func Connect() {
 	DB = db
 
 	//自动迁移类到数据库。
-	//err = db.AutoMigrate(&models.Car{}, &models.Location{}, &models.Customer{}, &models.BookRecord{})
-	//if err != nil {
-	//	panic("Could not create a table")
-	//}
+	err = db.AutoMigrate(&models.Car{}, &models.Location{}, &models.Customer{}, &models.BookRecord{})
+	if err != nil {
+		panic("Could not create a table")
+	}
 	initData()
 }

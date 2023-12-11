@@ -3,7 +3,7 @@ package models
 import "time"
 
 type BookRecord struct {
-	ReservationNum string    `json:"reservationId" gorm:"type:varchar(255);primary_key;not null"`
+	ReservationNum string    `json:"reservationId" gorm:"type:varchar(20);primary_key;not null"`
 	PricePerHour   float64   `json:"pricePerHour" gorm:"type:real;not null"`
 	PricePerDay    float64   `json:"pricePerDay" gorm:"type:real;not null"`
 	ReservedDate   time.Time `json:"reservedDate" gorm:"type:timestamp with time zone;not null"`
@@ -15,6 +15,6 @@ type BookRecord struct {
 	Car            Car       `json:"car" gorm:"foreignKey:CarId"`
 	LocationId     int       `json:"locationId" gorm:"constraint:OnUpdate:CASCADE,OnDelete:SET NULL"`
 	Location       Location  `json:"location" gorm:"foreignKey:LocationId"`
-	CustomerId     string    `json:"customerId" gorm:"type:varchar(255);not null;constraint:OnUpdate:CASCADE,OnDelete:SET NULL"`
+	CustomerId     string    `json:"customerId" gorm:"type:varchar(30);not null;constraint:OnUpdate:CASCADE,OnDelete:SET NULL"`
 	Customer       Customer  `json:"customer" gorm:"foreignKey:CustomerId;"`
 }

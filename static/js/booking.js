@@ -123,7 +123,7 @@ form.addEventListener("submit", async function(event) {
     const locationId = Number(form.elements["locationId"].value);
     const pickUpTime = new Date(form.elements["startTime"].value);
     const dropOfTime = new Date(form.elements["endTime"].value);
-    if (pickUpTime < dropOfTime) {
+    if (pickUpTime > dropOfTime) {
         alert('还车时间小于取车时间')
         return
     }

@@ -43,10 +43,12 @@ form.addEventListener("submit", async function(ev) {
         const textBox = document.createElement('div');
         textBox.classList.add('card-text');
 
+        const make = document.createElement('p');
+        make.innerHTML = `<strong>Make: ${car.make}</strong>`
         // 创建标题元素
         const heading = document.createElement('h3');
         heading.classList.add('heading-third');
-        heading.textContent = car.Model;
+        heading.textContent = car.model;
 
         // 创建座位数元素
         const seats = document.createElement('p');
@@ -68,6 +70,7 @@ form.addEventListener("submit", async function(ev) {
 
         // 将所有元素添加到文本盒子中
         textBox.append(heading);
+        textBox.append(make);
         textBox.append(seats);
         textBox.append(description);
         textBox.append(price);
